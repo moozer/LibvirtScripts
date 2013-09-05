@@ -28,12 +28,14 @@ echo "- base image is $OLDIMG"
 echo "- will create overlayed image $NEWIMG"
 echo "- new domain is $NEWDOMAIN"
 
+echo Creating new baseimage
+./ImgByBase.sh $OLDIMG $NEWIMG
 
-echo will run
-echo ./CloneVm.sh $VMTOCOPY $NEWDOMAIN $NEWIMG
+echo Cloning the domain with new image
+./CloneVm.sh $VMTOCOPY $NEWDOMAIN $NEWIMG
 
 echo Cleaning up
-#rm $OLDXMLFILE
+rm $OLDXMLFILE
 
 # yeah! success
 exit 0
