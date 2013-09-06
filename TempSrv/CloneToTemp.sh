@@ -20,7 +20,7 @@ fi
 
 # vars
 NEWDOMAIN="$1_$CURDATE"
-OLDIMG=$(cat $OLDXMLFILE | sed -ne "s#<source file='\(.*\)'/>#\1#p" | grep -v iso | sed 's/^ *//g') # find data, then skip all iso, then trim.
+OLDIMG=$(cat $OLDXMLFILE | sed -ne "s#<source file='\(.*\)'/>#\1#p" | head -n 1 | sed 's/^ *//g') # find data, then skip all iso, then trim.
 NEWIMG="$(dirname $OLDIMG)/$(basename $OLDIMG '.img')_$CURDATE.img"
 
 echo "Cloning virtual machine $VMTOCOPY"
