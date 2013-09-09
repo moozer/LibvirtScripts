@@ -19,11 +19,11 @@ echo Note: Not deleting old VM.
 
 echo
 echo Flattening
-echo ./ImgFlatten.sh $OLDIMG $NEWIMG
+./ImgFlatten.sh $OLDIMG $NEWIMG
 
 echo
 echo Creating new machine
-echo ./CloneVm.sh $VMTOPROM $NEWNAME $NEWIMG
+./CloneVm.sh $VMTOPROM $NEWNAME $NEWIMG
 
 
 
