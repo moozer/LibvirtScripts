@@ -9,7 +9,7 @@ fi
 VMTOCOPY=$1
 
 CURDATE=$(date +"%y%m%d_%H%M")
-OLDXMLFILE="tmp_$CURDATE.xml"
+OLDXMLFILE="/tmp/tmp_$CURDATE.xml"
 
 # get the xml
 sudo virsh dumpxml $VMTOCOPY > $OLDXMLFILE

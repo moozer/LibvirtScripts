@@ -11,7 +11,7 @@ if ! [ -e $3 ]; then
 	exit 1
 fi
 
-TMPFILENAME="tmpxml.xml"
+TMPFILENAME="/tmp/tmpxml.xml"
 OLDDOMAIN=$1
 NEWDOMAIN=$2
 NEWDISKIMG=$3
