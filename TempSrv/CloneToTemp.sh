@@ -6,8 +6,9 @@ if [ "$1" = "" ]; then
 	exit 1
 fi
 
-VMTOCOPY=$1
+PROGDIR=$(dirname $(realpath $0))
 
+VMTOCOPY=$1
 CURDATE=$(date +"%y%m%d_%H%M")
 OLDXMLFILE="/tmp/tmp_$CURDATE.xml"
 
@@ -29,10 +30,10 @@ echo "- will create overlayed image $NEWIMG"
 echo "- new domain is $NEWDOMAIN"
 
 echo Creating new baseimage
-./ImgByBase.sh $OLDIMG $NEWIMG
+$PROGDIR/ImgByBase.sh $OLDIMG $NEWIMG
 
 echo Cloning the domain with new image
-./CloneVm.sh $VMTOCOPY $NEWDOMAIN $NEWIMG
+$PROGDIR/CloneVm.sh $VMTOCOPY $NEWDOMAIN $NEWIMG
 
 echo Cleaning up
 rm $OLDXMLFILE
