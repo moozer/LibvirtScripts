@@ -2,7 +2,7 @@
 
 # only one parameter
 if [ "$1" = "" ]; then
-	echo "usage: $0 <vm-to-clone>"
+	echo "usage: $0 <vm-to-clone> [newName]" 
 	exit 1
 fi
 
@@ -29,6 +29,12 @@ fi
 
 # vars
 NEWDOMAIN="$1_$CURDATE"
+if [ "$2" ]
+then
+	echo using $2 for domain name
+	NEWDOMAIN="$2_$CURDATE"
+fi
+
 OLDIMG=$(cat $OLDXMLFILE | sed -ne "s#<source file='\(.*\)'/>#\1#p" | head -n 1 | sed 's/^ *//g') # find data, then skip all iso, then trim.
 NEWIMG="$(dirname $OLDIMG)/$(basename $OLDIMG '.img')_$CURDATE.img"
 
