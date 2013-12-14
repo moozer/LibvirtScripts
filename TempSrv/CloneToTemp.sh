@@ -2,7 +2,7 @@
 
 # only one parameter
 if [ "$1" = "" ]; then
-	echo "usage: $0 <vm-to-clone>"
+	echo "usage: $0 <vm-to-clone> [tag]"
 	exit 1
 fi
 
@@ -12,6 +12,12 @@ VMTOCOPY=$1
 CURDATE=$(date +"%y%m%d_%H%M")
 OLDXMLFILE="/tmp/tmp_$CURDATE.xml"
 
+if [ ! "$2" = "" ]; then
+	TAG="_$2"
+else
+	TAG=""
+fi
+
 # get the xml
 sudo virsh dumpxml $VMTOCOPY > $OLDXMLFILE
 if [ $? -ne 0 ]; then
@@ -20,9 +26,9 @@ if [ $? -ne 0 ]; then
 fi
 
 # vars
-NEWDOMAIN="$1_$CURDATE"
+NEWDOMAIN="${VMTOCOPY}_$CURDATE$TAG"
 OLDIMG=$(cat $OLDXMLFILE | sed -ne "s#<source file='\(.*\)'/>#\1#p" | head -n 1 | sed 's/^ *//g') # find data, then skip all iso, then trim.
-NEWIMG="$(dirname $OLDIMG)/$(basename $OLDIMG '.img')_$CURDATE.img"
+NEWIMG="$(dirname $OLDIMG)/$(basename $OLDIMG '.img')_$CURDATE$TAG.img"
 
 echo "Cloning virtual machine $VMTOCOPY"
 echo "- base image is $OLDIMG"
