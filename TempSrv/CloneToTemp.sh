@@ -6,6 +6,14 @@ if [ "$1" = "" ]; then
 	exit 1
 fi
 
+if ! which realpath > /dev/null; 
+then 
+	echo "realpath program not found in PATH"
+	echo "user 'apt-get install realpath' or similar"
+	exit
+fi
+
+
 PROGDIR=$(dirname $(realpath $0))
 
 VMTOCOPY=$1
