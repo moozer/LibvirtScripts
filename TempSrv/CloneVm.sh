@@ -25,6 +25,7 @@ echo - Setting VM name to $NEWDOMAIN
 echo - Setting first hdd to $NEWDISKIMG
 sudo virsh dumpxml $OLDDOMAIN | \
 grep -v uuid | \
+grep -v "mac address" | \
 sed "s#\(<name>\).*\(</name>\)#\1$NEWDOMAIN\2#" | \
 sed "s#\(<source file='\).*\('/>\)#\1$NEWDISKIMG\2#"  > $TMPFILENAME
 
